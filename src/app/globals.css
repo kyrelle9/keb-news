@@ -206,16 +206,21 @@ h4 {
 }
 
 .brand__mark {
+  align-items: center;
+  border: 1px solid rgba(17, 17, 19, 0.08);
+  border-radius: 1rem;
   flex: 0 0 auto;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(17, 17, 19, 0.1);
 }
 
-.brand__mark svg {
+.brand__mark-image {
   display: block;
   height: 3.25rem;
   width: 3.25rem;
 }
 
-.brand__mark--compact svg {
+.brand__mark--compact .brand__mark-image {
   height: 3rem;
   width: 3rem;
 }

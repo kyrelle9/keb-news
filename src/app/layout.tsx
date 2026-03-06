@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     title: "KEB News",
     description:
       "Original AI and tech briefings written from the source file, with an elegant front page built for real readers.",
+    images: [
+      {
+        alt: "KEB News logo",
+        height: 1024,
+        url: "/brand/keb-news-logo.png",
+        width: 1536,
+      },
+    ],
     siteName: "KEB News",
     type: "website",
     url: SITE_URL,
@@ -36,9 +44,12 @@ export const metadata: Metadata = {
     title: "KEB News",
     description:
       "Original AI and tech briefings written from the source file, not just outbound links.",
+    images: ["/brand/keb-news-logo.png"],
   },
   icons: {
-    icon: "/icon.svg",
+    apple: [{ type: "image/png", url: "/brand/keb-news-icon.png" }],
+    icon: [{ type: "image/png", url: "/brand/keb-news-icon.png" }],
+    shortcut: ["/brand/keb-news-icon.png"],
   },
 };
 

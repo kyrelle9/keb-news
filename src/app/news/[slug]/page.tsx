@@ -40,6 +40,14 @@ export async function generateMetadata({
     openGraph: {
       title: article.title,
       description: article.deck,
+      images: [
+        {
+          alt: "KEB News logo",
+          height: 1024,
+          url: "/brand/keb-news-logo.png",
+          width: 1536,
+        },
+      ],
       type: "article",
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
@@ -49,6 +57,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: article.title,
       description: article.deck,
+      images: ["/brand/keb-news-logo.png"],
     },
   };
 }
