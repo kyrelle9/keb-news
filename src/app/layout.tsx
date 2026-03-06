@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Newsreader } from "next/font/google";
-import { SITE_URL } from "@/lib/news";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/news";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -18,32 +18,46 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "KEB News",
-    template: "%s | KEB News",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "KEB News is an editorial-style AI and tech publication with original briefings written from primary-source material.",
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: SITE_URL,
+    types: {
+      "application/rss+xml": `${SITE_URL}/feed.xml`,
+    },
+  },
+  keywords: [
+    "AI news",
+    "tech news",
+    "OpenAI",
+    "Google Gemini",
+    "Anthropic",
+    "enterprise AI",
+    "AI infrastructure",
+  ],
   openGraph: {
-    title: "KEB News",
+    title: SITE_NAME,
     description:
-      "Original AI and tech briefings written from the source file, with an elegant front page built for real readers.",
+      "Original reporting on AI systems, products, labor, and enterprise software, designed to read like a real publication.",
     images: [
       {
-        alt: "KEB News logo",
+        alt: `${SITE_NAME} logo`,
         height: 1024,
         url: "/brand/keb-news-logo.png",
         width: 1536,
       },
     ],
-    siteName: "KEB News",
+    siteName: SITE_NAME,
     type: "website",
     url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "KEB News",
+    title: SITE_NAME,
     description:
-      "Original AI and tech briefings written from the source file, not just outbound links.",
+      "Original reporting on AI systems, products, labor, and enterprise software.",
     images: ["/brand/keb-news-logo.png"],
   },
   icons: {
@@ -59,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${manrope.variable} ${newsreader.variable}`}>{children}</body>
     </html>
   );

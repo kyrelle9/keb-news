@@ -6,7 +6,7 @@ type SiteLogoProps = {
 };
 
 export function SiteLogo({ compact = false, subtitle }: SiteLogoProps) {
-  const brandSubtitle = subtitle ?? "Editorial AI briefings.";
+  const brandSubtitle = subtitle ?? "Original reporting on AI systems, products, and power.";
 
   return (
     <>

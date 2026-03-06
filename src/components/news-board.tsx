@@ -28,10 +28,10 @@ const STAT_META: Array<{
   label: string;
   key: keyof NewsDigest["stats"];
 }> = [
-  { label: "Original briefs", key: "storyCount" },
-  { label: "Source files", key: "sourceCount" },
+  { label: "Reported stories", key: "storyCount" },
+  { label: "Primary sources", key: "sourceCount" },
   { label: "Desks tracked", key: "categoryCount" },
-  { label: "Fresh this week", key: "freshCount" },
+  { label: "Published this week", key: "freshCount" },
 ];
 
 export function NewsBoard({ digest }: { digest: NewsDigest }) {
@@ -52,7 +52,7 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
       return true;
     }
 
-    const haystack = `${article.title} ${article.deck} ${article.excerpt} ${article.kicker}`
+    const haystack = `${article.title} ${article.deck} ${article.excerpt} ${article.kicker} ${article.lede} ${article.keywords.join(" ")}`
       .toLowerCase()
       .trim();
 
@@ -85,7 +85,7 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
       <div className="page-frame">
         <header className="topbar panel panel--delayed-1">
           <Link className="brand" href="/">
-            <SiteLogo subtitle="AI and tech, written from the source file." />
+            <SiteLogo subtitle="Original reporting on AI systems and the companies shaping them." />
           </Link>
 
           <div className="topbar__meta">
@@ -100,12 +100,13 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
         <main className="main-grid">
           <section className="hero panel panel--delayed-2">
             <div className="hero__copy">
-              <p className="eyebrow">Original briefs from primary sources</p>
-              <h1 className="hero__title">The elegant AI news desk.</h1>
+              <p className="eyebrow">Original reporting from primary sources</p>
+              <h1 className="hero__title">An AI newsroom people can actually read.</h1>
               <p className="hero__description">
-                KEB News turns the latest moves in models, products, labor, and
-                enterprise software into original articles, so the homepage feels like a
-                real publication instead of a stack of outbound links.
+                KEB News turns the latest moves in models, products, labor, cloud, and
+                enterprise software into long-form articles with an editorial point of
+                view, so the homepage feels like a publication instead of an outbound
+                link farm.
               </p>
 
               <div className="hero__actions">
@@ -209,12 +210,12 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
             <section className="briefing-panel panel panel--delayed-5">
               <div className="section-heading">
                 <div>
-                  <p className="eyebrow">Today&apos;s desk</p>
+                  <p className="eyebrow">Front page follow-through</p>
                   <h2>More stories shaping the next seven days</h2>
                 </div>
                 <p className="section-heading__description">
-                  Shorter reads from the same source file, written to keep the site clean,
-                  fast, and actually useful to follow.
+                  Additional reads from the current reporting file, written to stay sharp
+                  on the homepage while opening into deeper full articles.
                 </p>
               </div>
 
@@ -325,12 +326,12 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
           <section className="source-panel panel panel--delayed-6">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">Source file</p>
+                <p className="eyebrow">Reporting stack</p>
                 <h2>Official desks this issue watched</h2>
               </div>
               <p className="section-heading__description">
-                The articles on KEB News are written from current primary-source material,
-                then edited into clean original briefs.
+                Every KEB News article starts with current primary-source material, then
+                gets rewritten into a cleaner original read for the front page.
               </p>
             </div>
 
@@ -370,7 +371,7 @@ function ArticleCard({
         <span className="story-card__kicker">{article.kicker}</span>
         <h3 className="story-card__title">{article.title}</h3>
         <p className="story-card__summary">{compact ? article.excerpt : article.deck}</p>
-        <span className="story-card__action">Read briefing</span>
+        <span className="story-card__action">Read article</span>
       </Link>
     </article>
   );
@@ -391,7 +392,7 @@ function StoryMeta({
       <div className="story-meta__line">
         <span>{article.publishedLabel}</span>
         <span>{article.readTime}</span>
-        <span>{article.sourceLinks.length} source file links</span>
+        <span>{article.sourceLinks.length} sources reviewed</span>
       </div>
     </div>
   );

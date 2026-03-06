@@ -7,6 +7,8 @@ import {
   getCategoryMeta,
   getAllArticles,
   getRelatedArticles,
+  NEWSROOM_NAME,
+  SITE_NAME,
   SITE_URL,
 } from "@/lib/news";
 
@@ -37,12 +39,16 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.deck,
+    keywords: article.keywords,
+    alternates: {
+      canonical: `${SITE_URL}/news/${article.slug}`,
+    },
     openGraph: {
       title: article.title,
       description: article.deck,
       images: [
         {
-          alt: "KEB News logo",
+          alt: `${SITE_NAME} logo`,
           height: 1024,
           url: "/brand/keb-news-logo.png",
           width: 1536,
@@ -80,14 +86,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     articleSection: categoryMeta.label,
+    keywords: article.keywords,
+    isAccessibleForFree: true,
     author: {
       "@type": "Organization",
-      name: "KEB News Desk",
+      name: NEWSROOM_NAME,
     },
     publisher: {
       "@type": "Organization",
-      name: "KEB News",
+      name: SITE_NAME,
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/brand/keb-news-icon.png`,
+      },
     },
     mainEntityOfPage: `${SITE_URL}/news/${article.slug}`,
   };
@@ -127,7 +139,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="article-hero__facts">
               <div className="meta-stat">
                 <span className="meta-stat__label">Byline</span>
-                <strong className="meta-stat__value">KEB News Desk</strong>
+                <strong className="meta-stat__value">{NEWSROOM_NAME}</strong>
               </div>
               <div className="meta-stat">
                 <span className="meta-stat__label">Filed</span>
@@ -138,7 +150,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <strong className="meta-stat__value">{article.readTime}</strong>
               </div>
               <div className="meta-stat">
-                <span className="meta-stat__label">Source file</span>
+                <span className="meta-stat__label">Sources</span>
                 <strong className="meta-stat__value">
                   {article.sourceLinks.length} links reviewed
                 </strong>
@@ -172,7 +184,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <aside className="article-rail">
               <section className="rail-card panel panel--delayed-4">
                 <div>
-                  <p className="eyebrow">Source file</p>
+                  <p className="eyebrow">Reporting file</p>
                   <h3>Material reviewed for this article</h3>
                 </div>
 
@@ -195,7 +207,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <section className="rail-card panel panel--delayed-5">
                 <div>
                   <p className="eyebrow">Read next</p>
-                  <h3>More from the current issue</h3>
+                  <h3>More from the current front page</h3>
                 </div>
 
                 <div className="related-list">

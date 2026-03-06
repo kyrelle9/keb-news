@@ -11,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: `${SITE_URL}/feed.xml`,
+      lastModified: articles[0]?.updatedAt,
+      changeFrequency: "daily",
+      priority: 0.5,
+    },
     ...articles.map((article) => ({
       url: `${SITE_URL}/news/${article.slug}`,
       lastModified: article.updatedAt,
