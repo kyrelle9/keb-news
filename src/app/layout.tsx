@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Newsreader } from "next/font/google";
+import { SITE_URL } from "@/lib/news";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -15,9 +16,30 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "KEB News",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "KEB News",
+    template: "%s | KEB News",
+  },
   description:
-    "A clean, fast pulse on the latest AI and tech stories from the publishers and builders shaping what is next.",
+    "KEB News is an editorial-style AI and tech publication with original briefings written from primary-source material.",
+  openGraph: {
+    title: "KEB News",
+    description:
+      "Original AI and tech briefings written from the source file, with an elegant front page built for real readers.",
+    siteName: "KEB News",
+    type: "website",
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KEB News",
+    description:
+      "Original AI and tech briefings written from the source file, not just outbound links.",
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
