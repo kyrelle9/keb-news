@@ -95,6 +95,9 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
     releases: digest.lanes.releases.filter(matchesArticle),
     signal: digest.lanes.signal.filter(matchesArticle),
   };
+  const visibleLaneKeys = (["ai", "tech", "releases", "signal"] as NewsSection[]).filter(
+    (sectionKey) => lanes[sectionKey].length > 0,
+  );
 
   const hasVisibleStories =
     featured.length > 0 ||
@@ -192,7 +195,11 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
           </section>
 
           {featured.length > 0 ? (
-            <section className="featured-grid">
+            <section
+              className={`featured-grid${
+                featured.length === 1 ? " featured-grid--single" : ""
+              }`}
+            >
               <article className="story-card story-card--lead panel panel--delayed-4">
                 <StoryMeta article={featured[0]} />
                 <a
@@ -263,13 +270,11 @@ export function NewsBoard({ digest }: { digest: NewsDigest }) {
             </section>
           ) : null}
 
-          <section className="lane-grid">
-            {(["ai", "tech", "releases", "signal"] as NewsSection[]).map((sectionKey) => {
+          <section
+            className={`lane-grid${visibleLaneKeys.length === 1 ? " lane-grid--single" : ""}`}
+          >
+            {visibleLaneKeys.map((sectionKey) => {
               const articles = lanes[sectionKey];
-
-              if (articles.length === 0) {
-                return null;
-              }
 
               return (
                 <section className="lane panel panel--delayed-6" key={sectionKey}>
