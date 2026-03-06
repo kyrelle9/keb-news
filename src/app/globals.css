@@ -914,10 +914,12 @@ h4 {
   }
 
   .article-title {
-    font-size: clamp(1.95rem, 8.6vw, 2.85rem);
-    line-height: 0.98;
+    font-size: clamp(1.72rem, 7.2vw, 2.4rem);
+    line-height: 1.02;
     max-width: none;
+    overflow-wrap: anywhere;
     text-wrap: pretty;
+    width: 100%;
   }
 
   .hero-note__text {
@@ -956,6 +958,16 @@ h4 {
   .hero,
   .article-hero {
     grid-template-columns: 1fr;
+  }
+
+  .article-hero,
+  .article-grid {
+    display: block;
+  }
+
+  .article-hero__facts,
+  .article-rail {
+    margin-top: 1rem;
   }
 
   .story-card,
